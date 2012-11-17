@@ -1,6 +1,6 @@
 # Handlerbars Paginate helper
 
-![screenshot](screenshot.png)
+![screenshot](https://github.com/olalonde/handlebars-paginate/raw/master/screenshot.png)
 
 ## Install
 
