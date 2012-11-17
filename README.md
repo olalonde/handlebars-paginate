@@ -27,7 +27,7 @@ var html = template({pagination: {
 
 template.hbs
 
-```handlebars
+```html
 <div class="pagination pagination-centered">
   <ul>
     {{#paginate pagination type="previous"}}
