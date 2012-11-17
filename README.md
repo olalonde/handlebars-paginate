@@ -1,8 +1,12 @@
-# Install
+# Handlerbars Paginate helper
+
+![screenshot]('./screenshot.png')
+
+## Install
 
     npm install handlebars-paginate
 
-# Usage
+## Usage
 
 hbs.js
 

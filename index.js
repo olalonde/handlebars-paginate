@@ -18,10 +18,8 @@ module.exports = function(pagination, options) {
           leftCount = limit - (pageCount - page) - 1;
         if (page - leftCount < 1)
           leftCount = page - 1;
-        console.log(leftCount);
         var start = page - leftCount;
 
-        console.log(start);
         while (i < limit && i < pageCount) {
           newContext = { n: start };
           if (start === page) newContext.active = true;
