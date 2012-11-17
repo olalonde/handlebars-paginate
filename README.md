@@ -1,6 +1,6 @@
 # Handlerbars Paginate helper
 
-![screenshot]('./screenshot.png')
+![screenshot](screenshot.png)
 
 ## Install
 
