@@ -1,7 +1,7 @@
 module.exports = function(pagination, options) {
   var type = options.hash.type || 'middle';
   var ret = '';
-  var pageCount = pagination.pageCount;
+  var pageCount = Number(pagination.pageCount);
   var page = Number(pagination.page);
   var limit;
   if (options.hash.limit) limit = +options.hash.limit;
