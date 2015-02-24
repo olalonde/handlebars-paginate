@@ -42,3 +42,7 @@ template.hbs
   </ul>
 </div>
 ```
+
+## License
+
+MIT License
