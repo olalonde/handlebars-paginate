@@ -1,7 +1,7 @@
 {
   "name": "handlebars-paginate",
   "main": "index.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/olalonde/handlebars-paginate",
   "authors": [
     "Olivier Lalonde (https://github.com/olalonde)"
