@@ -4,7 +4,7 @@
   "description": "Handlebars helper for pagination.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/index.test.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,9 @@
     "paginate"
   ],
   "author": "Olivier Lalonde <olalonde@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "sinon": "^1.15.4"
+  }
 }
