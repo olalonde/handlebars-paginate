@@ -16,6 +16,32 @@ describe('Handlebars Paginate Helper', function() {
     };
   });
 
+  describe('when type is "first"', function() {
+
+    beforeEach(function() {
+      options.hash.type = 'first';
+    });
+
+    it('should call options.fn with expected context', function() {
+      var cases = [{
+        input: { page: 1, pageCount: 3 },
+        expected: { disabled: true, n: 1 }
+      }, {
+        input: { page: 2, pageCount: 3 },
+        expected: { n: 1 }
+      }, {
+        input: { page: 3, pageCount: 3 },
+        expected: { n: 1 }
+      }];
+
+      cases.forEach(function(test) {
+        options.fn.reset();
+        paginate(test.input, options);
+        assert(options.fn.calledWith(test.expected));
+      });
+    });
+  });
+
   describe('when type is "previous"', function() {
 
     beforeEach(function() {
@@ -140,6 +166,32 @@ describe('Handlebars Paginate Helper', function() {
       }, {
         input: { page: 2, pageCount: 2 },
         expected: { disabled: true, n: 2 }
+      }];
+
+      cases.forEach(function(test) {
+        options.fn.reset();
+        paginate(test.input, options);
+        assert(options.fn.calledWith(test.expected));
+      });
+    });
+  });
+
+  describe('when type is "last"', function() {
+
+    beforeEach(function() {
+      options.hash.type = 'last';
+    });
+
+    it('should call options.fn with expected context', function() {
+      var cases = [{
+        input: { page: 1, pageCount: 3 },
+        expected: { n: 3 }
+      }, {
+        input: { page: 2, pageCount: 3 },
+        expected: { n: 3 }
+      }, {
+        input: { page: 3, pageCount: 3 },
+        expected: { disabled: true, n: 3 }
       }];
 
       cases.forEach(function(test) {
