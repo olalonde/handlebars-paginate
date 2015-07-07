@@ -49,6 +49,20 @@ template.hbs
 </div>
 ```
 
+## Changelog
+
+### Unreleased
+- Add `first` and `last` page types
+
+### 0.0.3 - 2015-05-20
+- Add bower support
+
+### 0.0.2 - 2015-05-18
+- Fix type errors with `pagination.page` and `pagination.pageCount`
+
+### 0.0.1 - 2012-11-16
+- Initial release
+
 ## License
 
 MIT License
