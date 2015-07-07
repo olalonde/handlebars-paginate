@@ -55,6 +55,24 @@ module.exports = function(pagination, options) {
       }
       ret = ret + options.fn(newContext);
       break;
+    case 'first':
+      if (page === 1) {
+        newContext = { disabled: true, n: 1 }
+      }
+      else {
+        newContext = { n: 1 }
+      }
+      ret = ret + options.fn(newContext);
+      break;
+    case 'last':
+      if (page === pageCount) {
+        newContext = { disabled: true, n: pageCount }
+      }
+      else {
+        newContext = { n: pageCount }
+      }
+      ret = ret + options.fn(newContext);
+      break;
   }
 
   return ret;
