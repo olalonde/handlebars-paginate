@@ -1,6 +1,6 @@
 {
   "name": "handlebars-paginate",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Handlebars helper for pagination.",
   "main": "index.js",
   "scripts": {

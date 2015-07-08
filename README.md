@@ -51,7 +51,7 @@ template.hbs
 
 ## Changelog
 
-### Unreleased
+### 0.1.0 - 2015-07-06
 - Add `first` and `last` page types
 
 ### 0.0.3 - 2015-05-20
