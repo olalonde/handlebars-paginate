@@ -14,14 +14,14 @@ module.exports = function(pagination, options) {
         var i = 0;
         var leftCount = Math.ceil(limit / 2) - 1;
         var rightCount = limit - leftCount - 1;
-        if (page + rightCount > pageCount)
-          leftCount = limit - (pageCount - page) - 1;
+        if (page + rightCount > pageCount - 1)
+          leftCount = limit - (pageCount - page);
         if (page - leftCount < 1)
-          leftCount = page - 1;
+          leftCount = page;
         var start = page - leftCount;
 
         while (i < limit && i < pageCount) {
-          newContext = { n: start };
+          newContext = { n: start + 1 };
           if (start === page) newContext.active = true;
           ret = ret + options.fn(newContext);
           start++;
