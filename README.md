@@ -1,6 +1,9 @@
-# Handlerbars Paginate helper
+# Handlebars Paginate helper
 
-![screenshot](https://github.com/olalonde/handlebars-paginate/raw/master/screenshot.png)
+![screenshot][screenshot]
+
+[![npm Version][npm-badge]][npm]
+[![Dependency Status][dep-badge]][dep-status]
 
 ## Install
 
@@ -8,24 +11,30 @@
 
 ## Usage
 
-hbs.js
+Register the __handlebars-paginate__ helper with [Handlebars][]:
 
 ```javascript
-/* ... */
-
+var Handlebars = require('handlebars');
 var paginate = require('handlebars-paginate');
 
 Handlebars.registerHelper('paginate', paginate);
-
-/* ... */
-
-var html = template({pagination: {
-  page: 3,
-  pageCount: 10
-}});
 ```
 
-template.hbs
+Then when rendering your template, specify the pagination details:
+
+```javascript
+var htmlString = myTemplate({
+  /* ... any other context data for your template here */
+
+  // Pagination data:
+  pagination: {
+    page: 4,       // The current page the user is on
+    pageCount: 10  // The total number of available pages
+  }
+});
+```
+
+Use `paginate` blocks in your template to build your pagination markup:
 
 ```html
 <div class="pagination pagination-centered">
@@ -49,49 +58,42 @@ template.hbs
 </div>
 ```
 
-For Bootstrap3
+NOTE: The specific names `paginate` and `pagination` are unimportant and may be
+renamed to anything you like. The only important thing is to be consistent and
+use the correct names in each JavaScript/Handlebars context.
 
-```html
-<nav aria-label="Page navigation">
-  <ul class="pagination">
-    {{#paginate pagination type="first"}}
-    <li class="page-item{{#if disabled}} disabled{{/if}}">
-      <a class="page-link" href="?page={{n}}" aria-label="First">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">First</span>
-      </a>
-    </li>
-    {{/paginate}}
-    {{#paginate pagination type="previous"}}
-    <li class="page-item{{#if disabled}} disabled{{/if}}">
-      <a class="page-link" href="?page={{n}}" aria-label="Previous">
-        <span aria-hidden="true">&lsaquo;</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </li>
-    {{/paginate}}
-    {{#paginate pagination type="middle" limit="10"}}
-    <li class="page-item"><a class="page-link{{#if disabled}} disabled{{/if}}" href="?page={{n}}">{{n}}</a></li>
-    {{/paginate}}
-    {{#paginate pagination type="next"}}
-    <li class="page-item{{#if disabled}} disabled{{/if}}">
-      <a class="page-link" href="?page={{n}}" aria-label="Next">
-        <span aria-hidden="true">&rsaquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </li>
-    {{/paginate}}
-    {{#paginate pagination type="last"}}
-    <li class="page-item{{#if disabled}} disabled{{/if}}">
-      <a class="page-link" href="?page={{n}}" aria-label="Last">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Last</span>
-      </a>
-    </li>
-    {{/paginate}}
-  </ul>
-</nav>
-```
+## Available Options
+
+To configure current pagination state, provide an options object for
+handlebars-paginate when calling your template. This object must be passed to
+the `paginate` blocks in your Handlebars markup.
+
+NOTE: The key name for the options object may be anything you like, though
+we've used `pagination` in the examples.
+
+#### `options.page` (Number or String)
+
+The current page that the user is on. Starts at 1.
+
+#### `options.pageCount` (Number or String)
+
+The total number of pages that are in the collection.
+
+## {{paginate}} Helper
+
+Renders the block for one or more pagination buttons, providing extra pagination
+context to the block being rendered.
+
+**Params**
+
+- `type` (String, Required): The button type. One of "first", "previous", "middle", "next", or "last"
+- `limit` (Number or String): The maximum number of "middle" buttons to render
+
+**Extra Context**
+
+- `active` (Bool): True for the button associated with the current page. Available to "middle" buttons.
+- `disabled` (Bool): True if the button should be disabled. Available to First/Previous/Next/Last buttons.
+- `n` (Number): Page number that the button is associated with. Available to all buttons.
 
 ## Changelog
 
@@ -110,3 +112,10 @@ For Bootstrap3
 ## License
 
 MIT License
+
+[screenshot]: https://github.com/olalonde/handlebars-paginate/raw/master/screenshot.png
+[npm]: https://www.npmjs.org/package/handlebars-paginate
+[npm-badge]: https://img.shields.io/npm/v/handlebars-paginate.svg?style=flat-square
+[dep-badge]: https://img.shields.io/david/jimf/handlebars-paginate.svg?style=flat-square
+[dep-status]: https://david-dm.org/jimf/handlebars-paginate
+[Handlebars]: http://handlebarsjs.com/
