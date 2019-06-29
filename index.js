@@ -39,10 +39,10 @@ module.exports = function(pagination, options) {
       break;
     case 'previous':
       if (page === 1) {
-        newContext = { disabled: true, n: 1 }
+        newContext = { disabled: true, n: 1, originalUrl: originalUrl }
       }
       else {
-        newContext = { n: page - 1 }
+        newContext = { n: page - 1, originalUrl: originalUrl }
       }
       ret = ret + options.fn(newContext);
       break;
