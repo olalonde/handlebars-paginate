@@ -1,7 +1,8 @@
-module.exports = function(pagination, options) {
-  var originalUrl = options.hash.originalUrl || '';
+module.exports = function (pagination, options) {
   var type = options.hash.type || 'middle';
   var ret = '';
+  var originalUrl = options.hash.originalUrl || 'http://localhost';
+  var fullUrl = new URL(originalUrl);
   var pageCount = Number(pagination.pageCount);
   var page = Number(pagination.page);
   var limit;
@@ -22,16 +23,23 @@ module.exports = function(pagination, options) {
         var start = page - leftCount;
 
         while (i < limit && i < pageCount) {
-          newContext = { n: start, originalUrl: originalUrl };
+          fullUrl.searchParams.set('page', start);
+          newContext = {
+            n: start,
+            fullUrl: fullUrl.href
+          };
           if (start === page) newContext.active = true;
           ret = ret + options.fn(newContext);
           start++;
           i++;
         }
-      }
-      else {
+      } else {
         for (var i = 1; i <= pageCount; i++) {
-          newContext = { n: i, originalUrl: originalUrl };
+          fullUrl.searchParams.set('page', i);
+          newContext = {
+            n: i,
+            fullUrl: fullUrl.href
+          };
           if (i === page) newContext.active = true;
           ret = ret + options.fn(newContext);
         }
@@ -39,38 +47,70 @@ module.exports = function(pagination, options) {
       break;
     case 'previous':
       if (page === 1) {
-        newContext = { disabled: true, n: 1, originalUrl: originalUrl }
-      }
-      else {
-        newContext = { n: page - 1, originalUrl: originalUrl }
+        fullUrl.searchParams.set('page', 1)
+        newContext = {
+          disabled: true,
+          n: 1,
+          fullUrl: fullUrl.href
+        }
+      } else {
+        fullUrl.searchParams.set('page', page - 1);
+        newContext = {
+          n: page - 1,
+          fullUrl: fullUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'next':
       newContext = {};
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount, originalUrl: originalUrl }
-      }
-      else {
-        newContext = { n: page + 1, originalUrl: originalUrl }
+        fullUrl.searchParams.set('page', pageCount);
+        newContext = {
+          disabled: true,
+          n: pageCount,
+          fullUrl: fullUrl.href
+        }
+      } else {
+        fullUrl.searchParams.set('page', page + 1);
+        newContext = {
+          n: page + 1,
+          fullUrl: fullUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'first':
       if (page === 1) {
-        newContext = { disabled: true, n: 1, originalUrl: originalUrl }
-      }
-      else {
-        newContext = { n: 1, originalUrl: originalUrl }
+        fullUrl.searchParams.set('page', 1);
+        newContext = {
+          disabled: true,
+          n: 1,
+          fullUrl: fullUrl.href
+        }
+      } else {
+        fullUrl.searchParams.set('page', 1);
+        newContext = {
+          n: 1,
+          fullUrl: fullUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'last':
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount, originalUrl: originalUrl }
-      }
-      else {
-        newContext = { n: pageCount, originalUrl: originalUrl }
+        fullUrl.searchParams.set('page', pageCount);
+        newContext = {
+          disabled: true,
+          n: pageCount,
+          fullUrl: fullUrl.href
+        }
+      } else {
+        fullUrl.searchParams.set('page', pageCount);
+        newContext = {
+          n: pageCount,
+          fullUrl: fullUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
