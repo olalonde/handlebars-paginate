@@ -1,7 +1,7 @@
 module.exports = function (pagination, options) {
   var type = options.hash.type || 'middle';
   var ret = '';
-  var originalUrl = options.hash.originalUrl || 'http://localhost';
+  var originalUrl = pagination.originalUrl || 'http://localhost';
   var fullUrl = new URL(originalUrl);
   var pageCount = Number(pagination.pageCount);
   var page = Number(pagination.page);
