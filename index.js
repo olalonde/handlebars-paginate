@@ -1,4 +1,5 @@
 module.exports = function(pagination, options) {
+  var originalUrl = options.hash.originalUrl || '';
   var type = options.hash.type || 'middle';
   var ret = '';
   var pageCount = Number(pagination.pageCount);
@@ -21,7 +22,7 @@ module.exports = function(pagination, options) {
         var start = page - leftCount;
 
         while (i < limit && i < pageCount) {
-          newContext = { n: start };
+          newContext = { n: start, originalUrl: originalUrl };
           if (start === page) newContext.active = true;
           ret = ret + options.fn(newContext);
           start++;
@@ -30,7 +31,7 @@ module.exports = function(pagination, options) {
       }
       else {
         for (var i = 1; i <= pageCount; i++) {
-          newContext = { n: i };
+          newContext = { n: i, originalUrl: originalUrl };
           if (i === page) newContext.active = true;
           ret = ret + options.fn(newContext);
         }
@@ -48,28 +49,28 @@ module.exports = function(pagination, options) {
     case 'next':
       newContext = {};
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount }
+        newContext = { disabled: true, n: pageCount, originalUrl: originalUrl }
       }
       else {
-        newContext = { n: page + 1 }
+        newContext = { n: page + 1, originalUrl: originalUrl }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'first':
       if (page === 1) {
-        newContext = { disabled: true, n: 1 }
+        newContext = { disabled: true, n: 1, originalUrl: originalUrl }
       }
       else {
-        newContext = { n: 1 }
+        newContext = { n: 1, originalUrl: originalUrl }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'last':
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount }
+        newContext = { disabled: true, n: pageCount, originalUrl: originalUrl }
       }
       else {
-        newContext = { n: pageCount }
+        newContext = { n: pageCount, originalUrl: originalUrl }
       }
       ret = ret + options.fn(newContext);
       break;
