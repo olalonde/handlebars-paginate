@@ -6,6 +6,8 @@ var assert = require('assert');
 var sinon = require('sinon');
 var paginate = require('..');
 
+var originalUrl = '';
+
 describe('Handlebars Paginate Helper', function() {
   var options;
 
@@ -25,13 +27,13 @@ describe('Handlebars Paginate Helper', function() {
     it('should call options.fn with expected context', function() {
       var cases = [{
         input: { page: 1, pageCount: 3 },
-        expected: { disabled: true, n: 1 }
+        expected: { disabled: true, n: 1, originalUrl: originalUrl }
       }, {
         input: { page: 2, pageCount: 3 },
-        expected: { n: 1 }
+        expected: { n: 1, originalUrl: originalUrl }
       }, {
         input: { page: 3, pageCount: 3 },
-        expected: { n: 1 }
+        expected: { n: 1, originalUrl: originalUrl }
       }];
 
       cases.forEach(function(test) {
@@ -51,10 +53,10 @@ describe('Handlebars Paginate Helper', function() {
     it('should call options.fn with expected context', function() {
       var cases = [{
         input: { page: 1, pageCount: 1 },
-        expected: { disabled: true, n: 1 }
+        expected: { disabled: true, n: 1, originalUrl: originalUrl }
       }, {
         input: { page: 2, pageCount: 2 },
-        expected: { n: 1 }
+        expected: { n: 1, originalUrl: originalUrl }
       }];
 
       cases.forEach(function(test) {
@@ -81,38 +83,38 @@ describe('Handlebars Paginate Helper', function() {
         var cases = [{
           input: { page: 1, pageCount: 7 },
           expected: [
-            { n: 1, active: true },
-            { n: 2 },
-            { n: 3 },
-            { n: 4 },
-            { n: 5 }
+            { n: 1, active: true, originalUrl: originalUrl },
+            { n: 2, originalUrl: originalUrl },
+            { n: 3, originalUrl: originalUrl },
+            { n: 4, originalUrl: originalUrl },
+            { n: 5, originalUrl: originalUrl }
           ]
         }, {
           input: { page: 2, pageCount: 7 },
           expected: [
-            { n: 1 },
-            { n: 2, active: true },
-            { n: 3 },
-            { n: 4 },
-            { n: 5 }
+            { n: 1, originalUrl: originalUrl },
+            { n: 2, active: true, originalUrl: originalUrl },
+            { n: 3, originalUrl: originalUrl },
+            { n: 4, originalUrl: originalUrl },
+            { n: 5, originalUrl: originalUrl }
           ]
         }, {
           input: { page: 3, pageCount: 7 },
           expected: [
-            { n: 1 },
-            { n: 2 },
-            { n: 3, active: true },
-            { n: 4 },
-            { n: 5 }
+            { n: 1, originalUrl: originalUrl },
+            { n: 2, originalUrl: originalUrl },
+            { n: 3, active: true, originalUrl: originalUrl },
+            { n: 4, originalUrl: originalUrl },
+            { n: 5, originalUrl: originalUrl }
           ]
         }, {
           input: { page: 4, pageCount: 7 },
           expected: [
-            { n: 2 },
-            { n: 3 },
-            { n: 4, active: true },
-            { n: 5 },
-            { n: 6 }
+            { n: 2, originalUrl: originalUrl },
+            { n: 3, originalUrl: originalUrl },
+            { n: 4, active: true, originalUrl: originalUrl },
+            { n: 5, originalUrl: originalUrl },
+            { n: 6, originalUrl: originalUrl }
           ]
         }];
 
@@ -132,13 +134,13 @@ describe('Handlebars Paginate Helper', function() {
         var cases = [{
           input: { page: 1, pageCount: 7 },
           expected: [
-            { n: 1, active: true },
-            { n: 2 },
-            { n: 3 },
-            { n: 4 },
-            { n: 5 },
-            { n: 6 },
-            { n: 7 }
+            { n: 1, active: true, originalUrl: originalUrl },
+            { n: 2, originalUrl: originalUrl },
+            { n: 3, originalUrl: originalUrl },
+            { n: 4, originalUrl: originalUrl },
+            { n: 5, originalUrl: originalUrl },
+            { n: 6, originalUrl: originalUrl },
+            { n: 7, originalUrl: originalUrl }
           ]
         }];
 
@@ -162,10 +164,10 @@ describe('Handlebars Paginate Helper', function() {
     it('should call options.fn with expected context', function() {
       var cases = [{
         input: { page: 1, pageCount: 2 },
-        expected: { n: 2 }
+        expected: { n: 2, originalUrl: originalUrl }
       }, {
         input: { page: 2, pageCount: 2 },
-        expected: { disabled: true, n: 2 }
+        expected: { disabled: true, n: 2, originalUrl: originalUrl }
       }];
 
       cases.forEach(function(test) {
@@ -185,13 +187,13 @@ describe('Handlebars Paginate Helper', function() {
     it('should call options.fn with expected context', function() {
       var cases = [{
         input: { page: 1, pageCount: 3 },
-        expected: { n: 3 }
+        expected: { n: 3, originalUrl: originalUrl }
       }, {
         input: { page: 2, pageCount: 3 },
-        expected: { n: 3 }
+        expected: { n: 3, originalUrl: originalUrl }
       }, {
         input: { page: 3, pageCount: 3 },
-        expected: { disabled: true, n: 3 }
+        expected: { disabled: true, n: 3, originalUrl: originalUrl }
       }];
 
       cases.forEach(function(test) {
