@@ -7,7 +7,7 @@ var sinon = require('sinon');
 var paginate = require('..');
 
 var originalUrl = 'http://localhost';
-var expectedUrl = new URL(originalUrl);
+var paginatedUrl = new URL(originalUrl);
 
 function setPageParamAndGetUrlHref(url, n) {
   if (url instanceof URL === true) {
@@ -42,7 +42,7 @@ describe('Handlebars Paginate Helper', function () {
         expected: {
           disabled: true,
           n: 1,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
         }
       }, {
         input: {
@@ -51,7 +51,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 1,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
         }
       }, {
         input: {
@@ -60,7 +60,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 1,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
         }
       }];
 
@@ -87,7 +87,7 @@ describe('Handlebars Paginate Helper', function () {
         expected: {
           disabled: true,
           n: 1,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
         }
       }, {
         input: {
@@ -96,7 +96,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 1,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
         }
       }];
 
@@ -129,19 +129,19 @@ describe('Handlebars Paginate Helper', function () {
           expected: [{
             n: 1,
             active: true,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
           }, {
             n: 2,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
           }, {
             n: 3,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
           }, {
             n: 4,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 4)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 4)
           }, {
             n: 5,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 5)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 5)
           }]
         }, {
           input: {
@@ -150,20 +150,20 @@ describe('Handlebars Paginate Helper', function () {
           },
           expected: [{
             n: 1,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
           }, {
             n: 2,
             active: true,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
           }, {
             n: 3,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
           }, {
             n: 4,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 4)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 4)
           }, {
             n: 5,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 5)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 5)
           }]
         }, {
           input: {
@@ -172,20 +172,20 @@ describe('Handlebars Paginate Helper', function () {
           },
           expected: [{
             n: 1,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
           }, {
             n: 2,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
           }, {
             n: 3,
             active: true,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
           }, {
             n: 4,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 4)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 4)
           }, {
             n: 5,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 5)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 5)
           }]
         }, {
           input: {
@@ -194,20 +194,20 @@ describe('Handlebars Paginate Helper', function () {
           },
           expected: [{
             n: 2,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
           }, {
             n: 3,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
           }, {
             n: 4,
             active: true,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 4)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 4)
           }, {
             n: 5,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 5)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 5)
           }, {
             n: 6,
-            fullUrl: setPageParamAndGetUrlHref(expectedUrl, 6)
+            paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 6)
           }]
         }];
 
@@ -232,28 +232,28 @@ describe('Handlebars Paginate Helper', function () {
           expected: [{
               n: 1,
               active: true,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 1)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 1)
             }, {
               n: 2,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
             },
             {
               n: 3,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
             },
             {
               n: 4,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 4)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 4)
             },
             {
               n: 5,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 5)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 5)
             }, {
               n: 6,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 6)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 6)
             }, {
               n: 7,
-              fullUrl: setPageParamAndGetUrlHref(expectedUrl, 7)
+              paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 7)
             }
           ]
         }];
@@ -283,7 +283,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 2,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
         }
       }, {
         input: {
@@ -293,7 +293,7 @@ describe('Handlebars Paginate Helper', function () {
         expected: {
           disabled: true,
           n: 2,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 2)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 2)
         }
       }];
 
@@ -319,7 +319,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 3,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
         }
       }, {
         input: {
@@ -328,7 +328,7 @@ describe('Handlebars Paginate Helper', function () {
         },
         expected: {
           n: 3,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
         }
       }, {
         input: {
@@ -338,7 +338,7 @@ describe('Handlebars Paginate Helper', function () {
         expected: {
           disabled: true,
           n: 3,
-          fullUrl: setPageParamAndGetUrlHref(expectedUrl, 3)
+          paginatedUrl: setPageParamAndGetUrlHref(paginatedUrl, 3)
         }
       }];
 
