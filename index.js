@@ -1,6 +1,8 @@
-module.exports = function(pagination, options) {
+module.exports = function (pagination, options) {
   var type = options.hash.type || 'middle';
   var ret = '';
+  var url = pagination.url || 'http://localhost';
+  var paginatedUrl = new URL(url);
   var pageCount = Number(pagination.pageCount);
   var page = Number(pagination.page);
   var limit;
@@ -21,16 +23,23 @@ module.exports = function(pagination, options) {
         var start = page - leftCount;
 
         while (i < limit && i < pageCount) {
-          newContext = { n: start };
+          paginatedUrl.searchParams.set('page', start);
+          newContext = {
+            n: start,
+            paginatedUrl: paginatedUrl.href
+          };
           if (start === page) newContext.active = true;
           ret = ret + options.fn(newContext);
           start++;
           i++;
         }
-      }
-      else {
+      } else {
         for (var i = 1; i <= pageCount; i++) {
-          newContext = { n: i };
+          paginatedUrl.searchParams.set('page', i);
+          newContext = {
+            n: i,
+            paginatedUrl: paginatedUrl.href
+          };
           if (i === page) newContext.active = true;
           ret = ret + options.fn(newContext);
         }
@@ -38,38 +47,70 @@ module.exports = function(pagination, options) {
       break;
     case 'previous':
       if (page === 1) {
-        newContext = { disabled: true, n: 1 }
-      }
-      else {
-        newContext = { n: page - 1 }
+        paginatedUrl.searchParams.set('page', 1)
+        newContext = {
+          disabled: true,
+          n: 1,
+          paginatedUrl: paginatedUrl.href
+        }
+      } else {
+        paginatedUrl.searchParams.set('page', page - 1);
+        newContext = {
+          n: page - 1,
+          paginatedUrl: paginatedUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'next':
       newContext = {};
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount }
-      }
-      else {
-        newContext = { n: page + 1 }
+        paginatedUrl.searchParams.set('page', pageCount);
+        newContext = {
+          disabled: true,
+          n: pageCount,
+          paginatedUrl: paginatedUrl.href
+        }
+      } else {
+        paginatedUrl.searchParams.set('page', page + 1);
+        newContext = {
+          n: page + 1,
+          paginatedUrl: paginatedUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'first':
       if (page === 1) {
-        newContext = { disabled: true, n: 1 }
-      }
-      else {
-        newContext = { n: 1 }
+        paginatedUrl.searchParams.set('page', 1);
+        newContext = {
+          disabled: true,
+          n: 1,
+          paginatedUrl: paginatedUrl.href
+        }
+      } else {
+        paginatedUrl.searchParams.set('page', 1);
+        newContext = {
+          n: 1,
+          paginatedUrl: paginatedUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
     case 'last':
       if (page === pageCount) {
-        newContext = { disabled: true, n: pageCount }
-      }
-      else {
-        newContext = { n: pageCount }
+        paginatedUrl.searchParams.set('page', pageCount);
+        newContext = {
+          disabled: true,
+          n: pageCount,
+          paginatedUrl: paginatedUrl.href
+        }
+      } else {
+        paginatedUrl.searchParams.set('page', pageCount);
+        newContext = {
+          n: pageCount,
+          paginatedUrl: paginatedUrl.href
+        }
       }
       ret = ret + options.fn(newContext);
       break;
